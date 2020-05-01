@@ -1,6 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+    isFocused: boolean;
+    isFilled: boolean;
+    isErrored: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
     background: #232129;
     border-radius: 10px;
     border: 2px solid #232129;
@@ -12,6 +18,26 @@ export const Container = styled.div`
     & + div {
         margin-top: 8px;
     }
+
+    ${(props) =>
+        props.isFilled &&
+        css`
+            border-color: #ff9000;
+            color: #ff9000;
+        `}
+
+    ${(props) =>
+        props.isErrored &&
+        css`
+            border-color: #c53030;
+        `}
+
+    ${(props) =>
+        props.isFocused &&
+        css`
+            color: #ff9000;
+            border-color: #ff9000;
+        `}
 
     input {
         flex: 1;
@@ -25,5 +51,13 @@ export const Container = styled.div`
 
     svg {
         margin-right: 16px;
+    }
+`;
+
+export const Error = styled.div`
+    height: 20px;
+    margin-left: 16px;
+    svg {
+        margin: 0;
     }
 `;
